@@ -18,17 +18,17 @@ def get_nyt_articles(year, month):
 def build_nyt_archive():
     articles = []
     month = 1
-    for year in range(2013, 2025):
+    for year in range(2014, 2025):
         articles.extend(get_nyt_articles(year, month))
         print(f'Fetched {len(articles)} articles total.')
-        time.sleep(10)
+        time.sleep(20)
     return articles
 
 def save_nyt_archive(articles):
     # check if the data folder exists, if not, create it
     if not os.path.exists('data'):
         os.makedirs('data')
-    with open('data/nyt_archive_2013_2023_jan.json', 'w') as f:
+    with open('data/nyt_archive_2014_2024_jan.json', 'w') as f:
         json.dump(articles, f)
 
 
