@@ -2,9 +2,9 @@ import json
 import requests
 import time
 import os
-from dotenv import load_dotenv
+from dotenv import dotenv_values
 
-config = load_dotenv()
+config = dotenv_values(".env")
 
 API_KEY = config['API_KEY']
 
@@ -12,12 +12,13 @@ def get_nyt_articles(year, month):
     url = f'https://api.nytimes.com/svc/archive/v1/{year}/{month}.json?api-key={API_KEY}'
     response = requests.get(url)
     response.raise_for_status()
+    # return only the articles. The response object contains metadata as well.
     return response.json()['response']['docs']
 
 def build_nyt_archive():
     articles = []
     month = 1
-    for year in range(2013, 2023):
+    for year in range(2013, 2025):
         articles.extend(get_nyt_articles(year, month))
         print(f'Fetched {len(articles)} articles total.')
         time.sleep(10)
