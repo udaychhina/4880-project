@@ -2,19 +2,15 @@ import requests
 import json
 import os
 import time
-import random
 
 api_key = "BqcW5aiOCB5grbROZbdKaGNnBeKX61xy"
-years = [2023, 2024]
-months = range(1, 9)  # Months 1 to 12
-num_requests = 4  # Number of random months to select
+years = range(2014, 2024)
+month = 1  # Fixed month, January in this case
 
 # Ensure the directory for storing files exists
 os.makedirs("NYT_Articles", exist_ok=True)
 
-for _ in range(num_requests):
-    year = random.choice(years)
-    month = random.choice(months)
+for year in years:
     url = f"https://api.nytimes.com/svc/archive/v1/{year}/{month}.json?api-key={api_key}"
     response = requests.get(url)
 
@@ -32,7 +28,7 @@ for _ in range(num_requests):
     else:
         print(f"Failed to retrieve data for {year}-{month}: {response.status_code}")
 
-    # Add a delay of 5 seconds between requests
-    time.sleep(5)
+    # Add a delay of 10 seconds between requests
+    time.sleep(10)
 
 print("Data retrieval complete!")
