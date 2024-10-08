@@ -2,9 +2,11 @@ import json
 import requests
 import time
 import os
+from dotenv import load_dotenv
 
-# change your API key here
-API_KEY = '4X3YJCiufGwCWyTYonHgnOcmMh3vqFfV'
+config = load_dotenv()
+
+API_KEY = config['API_KEY']
 
 def get_nyt_articles(year, month):
     url = f'https://api.nytimes.com/svc/archive/v1/{year}/{month}.json?api-key={API_KEY}'
