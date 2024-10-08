@@ -1,8 +1,9 @@
 import json
 import requests
 import time
+import os
 
-
+# change your API key here
 API_KEY = '4X3YJCiufGwCWyTYonHgnOcmMh3vqFfV'
 
 def get_nyt_articles(year, month):
@@ -21,6 +22,9 @@ def build_nyt_archive():
     return articles
 
 def save_nyt_archive(articles):
+    # check if the data folder exists, if not, create it
+    if not os.path.exists('data'):
+        os.makedirs('data')
     with open('data/nyt_archive_2013_2023_jan.json', 'w') as f:
         json.dump(articles, f)
 
